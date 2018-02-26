@@ -38,6 +38,6 @@ To install the plugin, follow these instructions.
 
 Some things to do, and ideas for potential features:
 
-* Release it
+## Credits
 
-Brought to you by [Rich @ Mud](http://ournameismud.co.uk/)
+Credit [allmarkedup](https://github.com/allmarkedup) for original [Fractal component loader plugin for Craft cms](https://gist.github.com/allmarkedup/72afed8e97c9b2e8c61c36b798ae1870)
