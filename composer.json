@@ -2,7 +2,7 @@
     "name": "ournameismud/fractal",
     "description": "Custom Fractal plugin",
     "type": "craft-plugin",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "keywords": [
         "craft",
         "cms",
@@ -26,7 +26,7 @@
     },
     "autoload": {
         "psr-4": {
-          "ournameismud\\fractal\\": "src/"
+            "ournameismud\\fractal\\": "src/"
         }
     },
     "extra": {
