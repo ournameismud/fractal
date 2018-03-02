@@ -10,7 +10,6 @@
 
 namespace ournameismud\fractal;
 
-require 'FractalTemplateLoader.php';
 use Craft;
 //use FractalTemplateLoader;
 use craft\base\Plugin;
