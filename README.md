@@ -24,7 +24,7 @@ To install the plugin, follow these instructions.
 
 ## Fractal Overview
 
--Insert text here-
+Make use of the Fractal library in Craft 3
 
 ## Configuring Fractal
 
