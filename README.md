@@ -1,8 +1,6 @@
 # Fractal plugin for Craft CMS 3.x
 
-Custom Fractal plugin
-
-![Screenshot](resources/img/plugin-logo.png)
+[Fractal](https://fractal.build/) plugin for Craft 3
 
 ## Requirements
 
