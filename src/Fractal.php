@@ -19,6 +19,7 @@ use craft\web\twig\Environment;
 use craft\web\twig\Extension;
 use craft\web\twig\Template;
 use craft\web\twig\TemplateLoader;
+use craft\web\twig\TemplateLoaderException;
 use craft\web\View;
 
 use yii\base\Exception;
