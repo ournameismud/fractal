@@ -24,18 +24,9 @@ To install the plugin, follow these instructions.
 
 Make use of the Fractal library in Craft 3
 
-## Configuring Fractal
-
--Insert text here-
-
-## Using Fractal
-
--Insert text here-
-
-## Fractal Roadmap
-
-Some things to do, and ideas for potential features:
-
-## Credits
+## Credits & Special Thanks
 
 Credit [allmarkedup](https://github.com/allmarkedup) for original [Fractal component loader plugin for Craft cms](https://gist.github.com/allmarkedup/72afed8e97c9b2e8c61c36b798ae1870)
+
+Special thanks to contributors - @jmcgaha
+
