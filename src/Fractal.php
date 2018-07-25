@@ -19,6 +19,7 @@ use craft\web\twig\Environment;
 use craft\web\twig\Extension;
 use craft\web\twig\Template;
 use craft\web\twig\TemplateLoader;
+use craft\web\twig\TemplateLoaderException;
 use craft\web\View;
 
 use yii\base\Exception;
@@ -117,83 +118,82 @@ class Fractal extends Plugin
                 ['name' => $this->name]
             ),
             __METHOD__
-				);
-				
-				//TemplatesService::getTwig()->setLoader();
-				$twig = Craft::$app->getView()->getTwig()->setLoader(new FractalTemplateLoader());
-				
-				//craft()->templates->getTwig()->setLoader(new FractalTemplateLoader());
+        );
+
+        //TemplatesService::getTwig()->setLoader();
+        $twig = Craft::$app->getView()->getTwig()->setLoader(new FractalTemplateLoader());
+        
+        //craft()->templates->getTwig()->setLoader(new FractalTemplateLoader());
     }
 
     // Protected Methods
-		// =========================================================================
+    // =========================================================================
 
 }
 
 class FractalTemplateLoader implements \Twig_LoaderInterface, \Twig_ExistsLoaderInterface
 {
 
-		
-		public function exists($name)
-		{
-			return Craft::$app->templates->doesTemplateExist($name);
-		}
+    public function exists($name)
+    {
+        return Craft::$app->templates->doesTemplateExist($name);
+    }
 
-		public function getSourceContext($name)
-		{
-				//throw new Exception($name);
+    public function getSourceContext($name)
+    {
+        //throw new Exception($name);
         $template = $this->_findTemplate($name);
 
         if (!is_readable($template)) {
             //throw new TemplateLoaderException($name, Craft::t('app', 'Tried to read the template at {path}, but could not. Check the permissions.', ['path' => $template]));
-						//throw new Exception($template);
-					}
+            //throw new Exception($template);
+        }
 
         return new \Twig_Source(file_get_contents($template), $name, $template);
-		}
+    }
 
-		public function getCacheKey($name)
-		{
-			if (is_string($name))
-			{
-				return $this->_findTemplate($name);
-			}
-			else
-			{
-				return $name->cacheKey;
-			}
-		}
+    public function getCacheKey($name)
+    {
+        if (is_string($name))
+        {
+            return $this->_findTemplate($name);
+        }
+        else
+        {
+            return $name->cacheKey;
+        }
+    }
 
-		public function isFresh($name, $time)
-		{
-			// If this is a CP request and a DB update is needed, force a recompile.
-			$request = Craft::$app->getRequest();
-			if ($request->getIsCpRequest() && Craft::$app->getUpdates()->getIsCraftDbMigrationNeeded()) {
-					return false;
-			}
+    public function isFresh($name, $time)
+    {
+        // If this is a CP request and a DB update is needed, force a recompile.
+        $request = Craft::$app->getRequest();
+        if ($request->getIsCpRequest() && Craft::$app->getUpdates()->getIsCraftDbMigrationNeeded()) {
+            return false;
+        }
 
-			if (is_string($name)) {
-					$sourceModifiedTime = filemtime($this->_findTemplate($name));
+        if (is_string($name)) {
+            $sourceModifiedTime = filemtime($this->_findTemplate($name));
 
-					return $sourceModifiedTime <= $time;
-			}
+            return $sourceModifiedTime <= $time;
+        }
 
-			return false;
-		}
+        return false;
+    }
 
-			private function _findTemplate($name)
-	{
-		
+    private function _findTemplate($name)
+    {
+
         if (strpos($name, '@') === 0)
         {
-						$mappingPath = CRAFT_BASE_PATH. '/components-map.json';
+            $mappingPath = CRAFT_BASE_PATH. '/components-map.json';
             if (is_readable($mappingPath))
             {
                 $mappings = json_decode(file_get_contents($mappingPath));
                 if ($mappings->$name) {
                     if (strpos($mappings->$name, '/') !== 0) {
-												//throw new Exception(realpath(CRAFT_BASE_PATH) . '/' . $mappings->$name->dest . '/' . $mappings->$name->file);
-												$template = realpath(CRAFT_BASE_PATH) . '/templates/' . $mappings->$name;
+                        //throw new Exception(realpath(CRAFT_BASE_PATH) . '/' . $mappings->$name->dest . '/' . $mappings->$name->file);
+                        $template = realpath(CRAFT_BASE_PATH) . '/templates/' . $mappings->$name;
                     } else {
                         $template = $mappings->$name;
                     }
@@ -206,14 +206,14 @@ class FractalTemplateLoader implements \Twig_LoaderInterface, \Twig_ExistsLoader
         }
         else
         {
-						$template = Craft::$app->getView()->resolveTemplate($name);
+            $template = Craft::$app->getView()->resolveTemplate($name);
         }
-		if (!$template)
-		{
-			//throw new TemplateLoaderException($name);
-			throw new TemplateLoaderException($name, Craft::t('app', 'Unable to find the template “{template}”.', ['template' => $name]));
-		}
-		return $template;
-	}
+        if (!$template)
+        {
+            //throw new TemplateLoaderException($name);
+            throw new TemplateLoaderException($name, Craft::t('app', 'Unable to find the template “{template}”.', ['template' => $name]));
+        }
+        return $template;
+    }
 
 }
