@@ -21,6 +21,7 @@ use craft\web\twig\Template;
 use craft\web\twig\TemplateLoader;
 use craft\web\twig\TemplateLoaderException;
 use craft\web\View;
+use craft\web\twig\TemplateLoaderException;
 
 use yii\base\Exception;
 use yii\base\Event;
