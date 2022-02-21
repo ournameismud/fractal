@@ -121,7 +121,9 @@ class Fractal extends Plugin
         );
 
         //TemplatesService::getTwig()->setLoader();
-        $twig = Craft::$app->getView()->getTwig()->setLoader(new FractalTemplateLoader());
+        if ( !Craft::$app->request->isCpRequest ) {
+             $twig = Craft::$app->getView()->getTwig()->setLoader(new FractalTemplateLoader());
+        }
         
         //craft()->templates->getTwig()->setLoader(new FractalTemplateLoader());
     }
