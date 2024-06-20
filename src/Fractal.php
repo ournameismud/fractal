@@ -136,7 +136,7 @@ class FractalTemplateLoader implements \Twig_LoaderInterface, \Twig_ExistsLoader
 
     public function exists($name)
     {
-        return Craft::$app->templates->doesTemplateExist($name);
+        return Craft::$app->getView()->doesTemplateExist($name);
     }
 
     public function getSourceContext($name)
